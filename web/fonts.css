@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: 400;
+    src: url(packages/font_awesome_flutter/fonts/FontAwesome5Brands-Regular.otf) format('opentype'),
+         url(packages/font_awesome_flutter/fonts/FontAwesome5Solid-Regular.otf) format('opentype');
+  }
+  
+  @font-face {
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: 900;
+    src: url(packages/font_awesome_flutter/fonts/FontAwesome5Brands-Solid.otf) format('opentype'),
+         url(packages/font_awesome_flutter/fonts/FontAwesome5Solid-Solid.otf) format('opentype');
+  }
+  
