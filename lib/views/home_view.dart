@@ -4,11 +4,14 @@ import 'package:moyeser_academy_web/constants/routes.dart';
 import '../constants/lists.dart';
 import '../widgets/footer.dart';
 import '../widgets/free_class_button.dart';
+import '../widgets/header_widget.dart';
 import '../widgets/info_section.dart';
 import '../widgets/social_media.dart';
 import '../widgets/tabs_item.dart';
 import '../widgets/user_form.dart';
 import 'programs_view.dart';
+
+int selectedIndex = 0;
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -19,152 +22,24 @@ class HomeView extends StatefulWidget {
 
 class HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
-  int _selectedIndex = 0;
-
-  final List<String> _tabs = [
-    'Home',
-    'Programs',
-    'Fees',
-    'Contact Us',
-    'Our Tutors',
-    'Comment',
-    'Blog',
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    // Any heavy initializations can go here
-  }
-
-  @override
-  void dispose() {
-    // Dispose of controllers and other resources
-    super.dispose();
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    switch (_tabs[index]) {
-      case 'Home':
-        Navigator.pushNamed(context, homeRoute);
-        break;
-      case 'Programs':
-        // Handle separately with PopupMenu
-        break;
-      case 'Fees':
-      case 'Contact Us':
-      case 'Our Tutors':
-      case 'Comment':
-      case 'Blog':
-        // Add routing for these as needed
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          _buildHeader(),
-          const Expanded(child: AnimatedBackgroundAndText()),
-        ],
-      ),
-    );
-  }
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const HeaderWidget(),
+            // Expanded(child: AnimatedBackgroundAndText()),
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              child: const InfoSection(),
+            ),
 
-  Widget _buildHeader() {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [kPrimaryColorGreen, kPrimaryColorGray],
-          end: Alignment.topCenter,
-          begin: Alignment.bottomCenter,
+            CustomFooter(),
+            // const UserForm(),
+          ],
         ),
       ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: SizedBox(
-                  height: 100,
-                  child: Image.asset('assets/images/logo.png'),
-                ),
-              ),
-              const SocialMedia(),
-              const FreeClassButton(),
-            ],
-          ),
-          const SizedBox(height: 12),
-          _buildTabs(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTabs() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const SizedBox(width: 5),
-          for (int i = 0; i < _tabs.length; i++)
-            i == 1 ? _buildPopupMenu(i) : _buildTabItem(i),
-          const SizedBox(width: 5),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPopupMenu(int index) {
-    return PopupMenuButton<int>(
-      onSelected: (int programIndex) {
-        setState(() {
-          _selectedIndex = index;
-        });
-        Navigator.pushNamed(
-          context,
-          '/programs',
-          arguments: ProgramsArguments(programIndex + 1),
-        );
-      },
-      itemBuilder: (BuildContext context) {
-        return List.generate(6, (programIndex) {
-          return PopupMenuItem<int>(
-            value: programIndex,
-            child: Text(programs[programIndex]),
-          );
-        });
-      },
-      child: Row(
-        children: [
-          TabsItem(
-            text: _tabs[index],
-            isSelected: _selectedIndex == index,
-          ),
-          const SizedBox(width: 100),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTabItem(int index) {
-    return Row(
-      children: [
-        TabsItem(
-          text: _tabs[index],
-          isSelected: _selectedIndex == index,
-          onTap: () => _onItemTapped(index),
-        ),
-        const SizedBox(width: 100),
-      ],
     );
   }
 }
@@ -267,12 +142,6 @@ class _AnimatedBackgroundAndTextState extends State<AnimatedBackgroundAndText>
                 ),
               ],
             ),
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: const InfoSection(),
-            ),
-            const UserForm(),
-            CustomFooter()
           ],
         ),
       ),

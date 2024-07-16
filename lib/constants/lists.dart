@@ -7,3 +7,12 @@
     'Arabic Language',
     'Quranic Arabic'
   ];
+    final List<String> tabs = [
+    'Home',
+    'Programs',
+    'Fees',
+    'Contact Us',
+    'Our Tutors',
+    'Comment',
+    'Blog',
+  ];

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:moyeser_academy_web/constants/colors.dart';
 import 'package:moyeser_academy_web/widgets/drop_down.dart';
 import '../Services/fire_base.dart';
+import '../constants/lists.dart';
 import 'phone_number_field.dart';
 import 'text_field.dart';
 
 class UserForm extends StatefulWidget {
-  const UserForm({super.key});
+  const UserForm({super.key,userForm});
 
   @override
   UserFormState createState() => UserFormState();
@@ -16,23 +17,17 @@ class UserFormState extends State<UserForm> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseService _firebaseService = FirebaseService();
   bool _isLoading = false;
-
+  bool userForm = true;
   String? _name, _email, _age, _gender, phone, _program;
-  final List<String> _genders = ['Male', 'Female', 'Other'];
-  final List<String> _programs = [
-    'Quran',
-    'Islamic Studies',
-    'Arabic Language'
-  ];
+  final List<String> _genders = ['Male', 'Female'];
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: kPrimaryColorGray,
         borderRadius: BorderRadius.circular(12.0),
-       
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +96,7 @@ class UserFormState extends State<UserForm> {
                   const SizedBox(height: 16.0),
                   buildDropdown(
                     label: 'Program',
-                    items: _programs,
+                    items: programs,
                     value: _program,
                     onChanged: (value) => setState(() => _program = value),
                     validator: (value) => value == null || value.isEmpty
@@ -136,7 +131,7 @@ class UserFormState extends State<UserForm> {
             ),
           ),
           const SizedBox(width: 20),
-          Flexible(
+         userForm? Flexible(
             flex: 2,
             child: Center(
               child: Container(
@@ -152,13 +147,14 @@ class UserFormState extends State<UserForm> {
                 ),
               ),
             ),
-          ),
+          ):Container()
         ],
       ),
     );
   }
 
   void _submitForm() async {
+    initializeFirebase();
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       setState(() {

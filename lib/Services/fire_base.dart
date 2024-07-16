@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class FirebaseService {
   static final FirebaseService _instance = FirebaseService._internal();
@@ -34,4 +35,18 @@ class FirebaseService {
       print('Error saving user data: $e');
     }
   }
+}
+
+Future<void> initializeFirebase() async {
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyCXmEXiQjki5vUFYVhKEAgMET9MeCwykAA",
+      authDomain: "moyeser-academey.firebaseapp.com",
+      projectId: "moyeser-academey",
+      storageBucket: "moyeser-academey.appspot.com",
+      messagingSenderId: "173191686386",
+      appId: "1:173191686386:web:82df9e9d818477e2d9486b",
+      measurementId: "G-37WBVB8L2M",
+    ),
+  );
 }
