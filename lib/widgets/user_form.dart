@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:moyeser_academy_web/constants/colors.dart';
 import 'package:moyeser_academy_web/widgets/drop_down.dart';
-import '../Services/fire_base.dart';
+import '../constants/colors.dart';
 import '../constants/lists.dart';
 import 'phone_number_field.dart';
 import 'text_field.dart';
 
 class UserForm extends StatefulWidget {
-  const UserForm({super.key,userForm});
+  final bool freeClssTxt;
+
+  const UserForm({super.key, required this.freeClssTxt});
 
   @override
   UserFormState createState() => UserFormState();
@@ -15,9 +16,8 @@ class UserForm extends StatefulWidget {
 
 class UserFormState extends State<UserForm> {
   final _formKey = GlobalKey<FormState>();
-  final FirebaseService _firebaseService = FirebaseService();
+  // final FirebaseService _firebaseService = FirebaseService();
   bool _isLoading = false;
-  bool userForm = true;
   String? _name, _email, _age, _gender, phone, _program;
   final List<String> _genders = ['Male', 'Female'];
 
@@ -26,7 +26,7 @@ class UserFormState extends State<UserForm> {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: kPrimaryColorGray,
+        // color: Colors.white,
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Row(
@@ -131,68 +131,70 @@ class UserFormState extends State<UserForm> {
             ),
           ),
           const SizedBox(width: 20),
-         userForm? Flexible(
-            flex: 2,
-            child: Center(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    TryFreeClassText(text: 'Try'),
-                    TryFreeClassText(text: ' a '),
-                    TryFreeClassText(text: 'Free '),
-                    TryFreeClassText(text: 'Class'),
-                  ],
-                ),
-              ),
-            ),
-          ):Container()
+          widget.freeClssTxt
+              ? Flexible(
+                  flex: 2,
+                  child: Center(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          TryFreeClassText(text: 'Try'),
+                          TryFreeClassText(text: ' a '),
+                          TryFreeClassText(text: 'Free '),
+                          TryFreeClassText(text: 'Class'),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              : Container()
         ],
       ),
     );
   }
 
   void _submitForm() async {
-    initializeFirebase();
-    if (_formKey.currentState?.validate() ?? false) {
-      _formKey.currentState?.save();
-      setState(() {
-        _isLoading = true;
-      });
+    // initializeFirebase();
+    // if (_formKey.currentState?.validate() ?? false) {
+    //   _formKey.currentState?.save();
+    //   setState(() {
+    //     _isLoading = true;
+    //   });
 
-      try {
-        bool userExists =
-            await _firebaseService.checkUserExists(_email!, phone!);
+    //   try {
+    //     bool userExists =
+    //         await _firebaseService.checkUserExists(_email!, phone!);
 
-        if (userExists) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('User already exists!')),
-          );
-        } else {
-          await _firebaseService.saveUserData({
-            'name': _name,
-            'email': _email,
-            'phone': phone,
-            'age': _age,
-            'gender': _gender,
-            'program': _program,
-          });
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('User data submitted successfully!')),
-          );
-          _formKey.currentState?.reset();
-        }
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
-        );
-      } finally {
-        setState(() {
-          _isLoading = false;
-        });
-      }
-    }
+    //     if (userExists) {
+    //       ScaffoldMessenger.of(context).showSnackBar(
+    //         const SnackBar(content: Text('User already exists!')),
+    //       );
+    //     } else {
+    //       await _firebaseService.saveUserData({
+    //         'name': _name,
+    //         'email': _email,
+    //         'phone': phone,
+    //         'age': _age,
+    //         'gender': _gender,
+    //         'program': _program,
+    //       });
+    //       ScaffoldMessenger.of(context).showSnackBar(
+    //         const SnackBar(content: Text('User data submitted successfully!')),
+    //       );
+    //       _formKey.currentState?.reset();
+    //     }
+    //   } catch (e) {
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(content: Text('Error: $e')),
+    //     );
+    //   } finally {
+    //     setState(() {
+    //       _isLoading = false;
+    //     });
+    //   }
+    // }
   }
 }
 

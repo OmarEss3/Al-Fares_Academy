@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:moyeser_academy_web/constants/colors.dart';
-import 'package:moyeser_academy_web/constants/routes.dart';
-import '../constants/lists.dart';
 import '../widgets/footer.dart';
-import '../widgets/free_class_button.dart';
 import '../widgets/header_widget.dart';
 import '../widgets/info_section.dart';
-import '../widgets/social_media.dart';
-import '../widgets/tabs_item.dart';
 import '../widgets/user_form.dart';
-import 'programs_view.dart';
-
-int selectedIndex = 0;
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -20,8 +11,7 @@ class HomeView extends StatefulWidget {
   HomeViewState createState() => HomeViewState();
 }
 
-class HomeViewState extends State<HomeView>
-    with SingleTickerProviderStateMixin {
+class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,20 +19,19 @@ class HomeViewState extends State<HomeView>
         child: Column(
           children: [
             const HeaderWidget(),
-            // Expanded(child: AnimatedBackgroundAndText()),
             Container(
               padding: const EdgeInsets.all(16.0),
               child: const InfoSection(),
             ),
-
+            const UserForm(freeClssTxt: true),
             CustomFooter(),
-            // const UserForm(),
           ],
         ),
       ),
     );
   }
 }
+
 
 class AnimatedBackgroundAndText extends StatefulWidget {
   const AnimatedBackgroundAndText({super.key});

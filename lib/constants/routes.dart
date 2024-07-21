@@ -1,2 +1,3 @@
-const String homeRoute = '/home';
-const String contactUsRoute='/contactUs';
+const String homeRoute = '/';
+const String contactUsRoute = '/contactUs';
+const String feesRoute = '/fees';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../constants/colors.dart';
 import '../constants/lists.dart';
 import '../constants/routes.dart';
-import '../views/home_view.dart';
+import '../provider/navigation_provider.dart';
 import '../views/programs_view.dart';
 import 'free_class_button.dart';
 import 'social_media.dart';
@@ -67,9 +67,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   Widget buildPopupMenu(int index) {
     return PopupMenuButton<int>(
       onSelected: (int programIndex) {
-        setState(() {
-          selectedIndex = index;
-        });
+        Provider.of<NavigationProvider>(context, listen: false)
+            .setSelectedIndex(index);
         Navigator.pushNamed(
           context,
           '/programs',
@@ -86,9 +85,13 @@ class _HeaderWidgetState extends State<HeaderWidget> {
       },
       child: Row(
         children: [
-          TabsItem(
-            text: tabs[index],
-            isSelected: selectedIndex == index,
+          Consumer<NavigationProvider>(
+            builder: (context, provider, child) {
+              return TabsItem(
+                text: tabs[index],
+                isSelected: provider.selectedIndex == index,
+              );
+            },
           ),
           const SizedBox(width: 100),
         ],
@@ -99,10 +102,14 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   Widget buildTabItem(int index) {
     return Row(
       children: [
-        TabsItem(
-          text: tabs[index],
-          isSelected: selectedIndex == index,
-          onTap: () => onItemTapped(index),
+        Consumer<NavigationProvider>(
+          builder: (context, provider, child) {
+            return TabsItem(
+              text: tabs[index],
+              isSelected: provider.selectedIndex == index,
+              onTap: () => onItemTapped(index),
+            );
+          },
         ),
         const SizedBox(width: 100),
       ],
@@ -110,20 +117,21 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   }
 
   void onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
+    Provider.of<NavigationProvider>(context, listen: false)
+        .setSelectedIndex(index);
     switch (tabs[index]) {
       case 'Home':
-        Navigator.pushNamed(context, homeRoute);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(homeRoute, (route) => false);
         break;
       case 'Programs':
         // Handle separately with PopupMenu
         break;
       case 'Fees':
       case 'Contact Us':
-        Navigator.pushNamed(context, contactUsRoute);
-
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(contactUsRoute, (route) => false);
+        break;
       case 'Our Tutors':
       case 'Comment':
       case 'Blog':
