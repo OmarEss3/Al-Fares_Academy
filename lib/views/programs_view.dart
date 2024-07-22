@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../design_pattern.dart';
 
 class ProgramsArguments {
   final int programId;
@@ -26,8 +29,8 @@ class ProgramsViewState extends State<ProgramsView>
       vsync: this,
     );
     _animation = Tween<Offset>(
-      begin: Offset(0, 1),
-      end: Offset(0, 0),
+      begin: const Offset(0, 1),
+      end: const Offset(0, 0),
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeOut,
@@ -43,18 +46,17 @@ class ProgramsViewState extends State<ProgramsView>
 
   @override
   Widget build(BuildContext context) {
-    final ProgramsArguments args =
-        ModalRoute.of(context)!.settings.arguments as ProgramsArguments;
+    final args = GoRouterState.of(context).extra as ProgramsArguments?;
+    final programContent =
+        ProgramContentFactory.getProgramContent(args?.programId ?? 0);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Program ${args.programId}'),
-      ),
+     
       body: Stack(
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/images/program${args.programId}.jpg', // Use different images for each program
+              'assets/images/program${args?.programId ?? 'default'}.jpeg',
               fit: BoxFit.cover,
               color: Colors.black.withOpacity(0.5),
               colorBlendMode: BlendMode.darken,
@@ -64,15 +66,32 @@ class ProgramsViewState extends State<ProgramsView>
             child: SlideTransition(
               position: _animation,
               child: Container(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 color: Colors.black54,
-                child: Text(
-                  'Content for Program ${args.programId}',
-                  style: const TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: SingleChildScrollView(
+                        child: Text(
+                          programContent.text,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      flex: 2,
+                      child: Image.asset(
+                        programContent.imagePath,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

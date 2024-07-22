@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import '../constants/colors.dart';
 import '../constants/lists.dart';
 import '../constants/routes.dart';
@@ -17,6 +18,34 @@ class HeaderWidget extends StatefulWidget {
 }
 
 class _HeaderWidgetState extends State<HeaderWidget> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final provider = Provider.of<NavigationProvider>(context, listen: false);
+    final currentRoute = GoRouterState.of(context).uri.toString();
+
+    int newIndex =
+        tabs.indexWhere((tab) => getRouteForTab(tab) == currentRoute);
+    if (newIndex != -1 && provider.selectedIndex != newIndex) {
+      provider.setSelectedIndex(newIndex);
+    }
+  }
+
+  String getRouteForTab(String tab) {
+    switch (tab) {
+      case 'Home':
+        return homeRoute;
+      case 'Programs':
+        return '/programs';
+      case 'Fees':
+        return feesRoute;
+      case 'Contact Us':
+        return contactUsRoute;
+      default:
+        return '';
+    }
+  }
+
   Widget buildHeader() {
     return Container(
       decoration: BoxDecoration(
@@ -64,16 +93,13 @@ class _HeaderWidgetState extends State<HeaderWidget> {
     );
   }
 
+  // Inside buildPopupMenu method
   Widget buildPopupMenu(int index) {
     return PopupMenuButton<int>(
       onSelected: (int programIndex) {
         Provider.of<NavigationProvider>(context, listen: false)
             .setSelectedIndex(index);
-        Navigator.pushNamed(
-          context,
-          '/programs',
-          arguments: ProgramsArguments(programIndex + 1),
-        );
+        context.go('/programs', extra: ProgramsArguments(programIndex + 1));
       },
       itemBuilder: (BuildContext context) {
         return List.generate(6, (programIndex) {
@@ -119,25 +145,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   void onItemTapped(int index) {
     Provider.of<NavigationProvider>(context, listen: false)
         .setSelectedIndex(index);
-    switch (tabs[index]) {
-      case 'Home':
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil(homeRoute, (route) => false);
-        break;
-      case 'Programs':
-        // Handle separately with PopupMenu
-        break;
-      case 'Fees':
-      case 'Contact Us':
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil(contactUsRoute, (route) => false);
-        break;
-      case 'Our Tutors':
-      case 'Comment':
-      case 'Blog':
-        // Add routing for these as needed
-        break;
-    }
+    context.go(getRouteForTab(tabs[index]));
   }
 
   @override

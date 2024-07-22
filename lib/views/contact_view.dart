@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moyeser_academy_web/constants/variables.dart';
 import 'package:moyeser_academy_web/widgets/footer.dart';
 import 'package:moyeser_academy_web/widgets/header_widget.dart';
 import '../constants/colors.dart';
@@ -51,7 +52,7 @@ class ContactUsView extends StatelessWidget {
                         children: [
                           Icon(Icons.phone, color: kPrimaryColorGreen),
                           const SizedBox(width: 10),
-                          const Text('(123) 456-7890'),
+                          const Text(kPhoneNumber),
                         ],
                       ),
                       Row(
@@ -59,7 +60,7 @@ class ContactUsView extends StatelessWidget {
                         children: [
                           Icon(Icons.email, color: kPrimaryColorGreen),
                           const SizedBox(width: 10),
-                          const Text('Gmail@gmail.com'),
+                          const Text(kEmail),
                         ],
                       ),
                       const SizedBox(height: 50),
