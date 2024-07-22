@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:moyeser_academy_web/views/fees_view.dart';
-import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'constants/routes.dart';
 import 'provider/navigation_provider.dart';
 import 'views/contact_view.dart';
+import 'views/fees_view.dart';
 import 'views/home_view.dart';
 import 'views/programs_view.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await initializeFirebase();
   runApp(
     ChangeNotifierProvider(
       create: (context) => NavigationProvider(),
@@ -32,8 +30,12 @@ class MyApp extends StatelessWidget {
           builder: (context, state) => const HomeView(),
         ),
         GoRoute(
-          path: '/programs',
-          builder: (context, state) => const ProgramsView(),
+          path: '$programsRoute/:id',
+          builder: (context, state) {
+            final programId =
+                int.tryParse(state.pathParameters['id'] ?? '0') ?? 0;
+            return ProgramsView(programId: programId);
+          },
         ),
         GoRoute(
           path: contactUsRoute,
@@ -41,8 +43,7 @@ class MyApp extends StatelessWidget {
         ),
         GoRoute(
           path: feesRoute,
-          builder: (context, state) =>
-              const FeesView(), // Add the new pricing page route
+          builder: (context, state) => const FeesView(),
         ),
       ],
     );

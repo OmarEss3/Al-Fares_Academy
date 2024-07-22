@@ -1,4 +1,5 @@
+// constants/routes.dart
 const String homeRoute = '/';
-const String contactUsRoute = '/contactUs';
+const String programsRoute = '/programs';
+const String contactUsRoute = '/contact';
 const String feesRoute = '/fees';
-

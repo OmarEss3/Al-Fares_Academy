@@ -36,7 +36,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
       case 'Home':
         return homeRoute;
       case 'Programs':
-        return '/programs';
+        return programsRoute;
       case 'Fees':
         return feesRoute;
       case 'Contact Us':
@@ -93,13 +93,12 @@ class _HeaderWidgetState extends State<HeaderWidget> {
     );
   }
 
-  // Inside buildPopupMenu method
   Widget buildPopupMenu(int index) {
     return PopupMenuButton<int>(
       onSelected: (int programIndex) {
         Provider.of<NavigationProvider>(context, listen: false)
             .setSelectedIndex(index);
-        context.go('/programs', extra: ProgramsArguments(programIndex + 1));
+        GoRouter.of(context).go('$programsRoute/${programIndex + 1}');
       },
       itemBuilder: (BuildContext context) {
         return List.generate(6, (programIndex) {

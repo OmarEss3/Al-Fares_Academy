@@ -1,31 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:moyeser_academy_web/widgets/footer.dart';
 import 'package:moyeser_academy_web/widgets/header_widget.dart';
-
 import '../design_pattern.dart';
 
-class ProgramsArguments {
+class ProgramsView extends StatefulWidget {
   final int programId;
 
-  ProgramsArguments(this.programId);
-}
-
-class ProgramsView extends StatefulWidget {
-  const ProgramsView({super.key});
+  const ProgramsView({super.key, required this.programId});
 
   @override
   ProgramsViewState createState() => ProgramsViewState();
 }
 
-class ProgramsViewState extends State<ProgramsView>
-    with SingleTickerProviderStateMixin {
-  
+class ProgramsViewState extends State<ProgramsView> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    final args = GoRouterState.of(context).extra as ProgramsArguments?;
-    final programContent =
-        ProgramContentFactory.getProgramContent(args?.programId ?? 0);
+    final programContent = ProgramContentFactory.getProgramContent(widget.programId);
 
     return Scaffold(
       body: SingleChildScrollView(
