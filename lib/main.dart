@@ -6,6 +6,7 @@ import 'provider/navigation_provider.dart';
 import 'views/contact_view.dart';
 import 'views/fees_view.dart';
 import 'views/home_view.dart';
+import 'views/out_tutors_view.dart';
 import 'views/programs_view.dart';
 
 void main() async {
@@ -44,6 +45,10 @@ class MyApp extends StatelessWidget {
         GoRoute(
           path: feesRoute,
           builder: (context, state) => const FeesView(),
+        ),
+        GoRoute(
+          path: outTutorsRoute,
+          builder: (context, state) => const OurTutorsView(),
         ),
       ],
     );

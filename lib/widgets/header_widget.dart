@@ -5,7 +5,6 @@ import '../constants/colors.dart';
 import '../constants/lists.dart';
 import '../constants/routes.dart';
 import '../provider/navigation_provider.dart';
-import '../views/programs_view.dart';
 import 'free_class_button.dart';
 import 'social_media.dart';
 import 'tabs_item.dart';
@@ -41,6 +40,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
         return feesRoute;
       case 'Contact Us':
         return contactUsRoute;
+      case 'Our Tutors':
+        return outTutorsRoute;
       default:
         return '';
     }
@@ -98,7 +99,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
       onSelected: (int programIndex) {
         Provider.of<NavigationProvider>(context, listen: false)
             .setSelectedIndex(index);
-        GoRouter.of(context).go('$programsRoute/${programIndex + 1}');
+        GoRouter.of(context).go('$programsRoute/$programIndex');
       },
       itemBuilder: (BuildContext context) {
         return List.generate(6, (programIndex) {
