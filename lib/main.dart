@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:moyeser_academy_web/views/blogs_view.dart';
+import 'package:moyeser_academy_web/views/comments_view.dart';
 import 'package:provider/provider.dart';
 import 'constants/routes.dart';
 import 'provider/navigation_provider.dart';
@@ -49,6 +51,14 @@ class MyApp extends StatelessWidget {
         GoRoute(
           path: outTutorsRoute,
           builder: (context, state) => const OurTutorsView(),
+        ),
+        GoRoute(
+          path: commentsRoute,
+          builder: (context, state) => const CommentsView(),
+        ),
+        GoRoute(
+          path: blogsRoute,
+          builder: (context, state) => const BlogsView(),
         ),
       ],
     );

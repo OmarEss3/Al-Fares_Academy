@@ -43,7 +43,7 @@ class OurTutorsView extends StatelessWidget {
                                 CircleAvatar(
                                   radius: 40,
                                   backgroundImage: AssetImage(
-                                      'assets/images/tutor${index + 1}.jpg'), // Replace with your image assets
+                                      'assets/images/tutor${index + 1}.jpg'), 
                                 ),
                                 const SizedBox(width: 16),
                                 Column(

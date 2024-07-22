@@ -1,5 +1,10 @@
-
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:moyeser_academy_web/constants/routes.dart';
+import 'package:provider/provider.dart';
+
+import '../constants/lists.dart';
+import '../provider/navigation_provider.dart';
 
 class FreeClassButton extends StatelessWidget {
   const FreeClassButton({
@@ -10,18 +15,28 @@ class FreeClassButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: const Color(0xff006464),
-        ),
-        height: 40,
-        width: 200,
-        child: const Center(
-          child: Text(
-            'Get a free class',
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white,),
+      child: GestureDetector(
+        onTap: () {
+          Provider.of<NavigationProvider>(context, listen: false)
+              .setSelectedIndex(3);
+          GoRouter.of(context).go(contactUsRoute);
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: const Color(0xff006464),
+          ),
+          height: 40,
+          width: 200,
+          child: const Center(
+            child: Text(
+              'Get a free class',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
           ),
         ),
       ),

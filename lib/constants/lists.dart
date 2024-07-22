@@ -13,6 +13,6 @@
     'Fees',
     'Contact Us',
     'Our Tutors',
-    'Comment',
-    'Blog',
+    'Comments',
+    'Blogs',
   ];

@@ -42,6 +42,10 @@ class _HeaderWidgetState extends State<HeaderWidget> {
         return contactUsRoute;
       case 'Our Tutors':
         return outTutorsRoute;
+      case 'Comments':
+        return commentsRoute;
+      case 'Blogs':
+        return blogsRoute;
       default:
         return '';
     }
