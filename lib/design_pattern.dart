@@ -50,7 +50,7 @@ For more information, please contact us through our email or WhatsApp. We will r
 Email: $kEmail
 
 Whatsapp: $kPhoneNumber.''',
-          imagePath: 'assets/images/program2_medium.jpg',
+          imagePath: 'assets/images/program2.jpeg',
         );
       case 3:
         return ProgramContent(
@@ -86,7 +86,7 @@ For more information, please contact us through our email or WhatsApp. We will r
 Email: $kEmail
 
 Whatsapp: $kPhoneNumber.''',
-          imagePath: 'assets/images/program3_medium.jpg',
+          imagePath: 'assets/images/program3.jpeg',
         );
       case 4:
         return ProgramContent(
@@ -103,7 +103,7 @@ For more information, please contact us through our email or WhatsApp. We will r
 Email: $kEmail
 
 Whatsapp: $kPhoneNumber.''',
-          imagePath: 'assets/images/program4_medium.jpg',
+          imagePath: 'assets/images/program4.jpeg',
         );
       case 5:
         return ProgramContent(
@@ -132,7 +132,7 @@ For more information, please contact us through our email or WhatsApp. We will r
 Email: $kEmail
 
 Whatsapp: $kPhoneNumber.''',
-          imagePath: 'assets/images/program5_medium.jpg',
+          imagePath: 'assets/images/program5.jpg',
         );
       case 6:
         return ProgramContent(
@@ -150,7 +150,7 @@ For more information, please contact us through our email or WhatsApp. We will r
 Email: $kEmail
 
 Whatsapp: $kPhoneNumber.''',
-          imagePath: 'assets/images/program6_medium.jpg',
+          imagePath: 'assets/images/program6.jpeg',
         );
       default:
         return ProgramContent(
