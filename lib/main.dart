@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:moyeser_academy_web/views/blogs_view.dart';
 import 'package:moyeser_academy_web/views/comments_view.dart';
 import 'package:provider/provider.dart';
+import 'Services/fire_base.dart';
 import 'constants/routes.dart';
 import 'provider/navigation_provider.dart';
 import 'views/contact_view.dart';
@@ -12,6 +13,10 @@ import 'views/out_tutors_view.dart';
 import 'views/programs_view.dart';
 
 void main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    await  initializeFirebase();
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => NavigationProvider(),

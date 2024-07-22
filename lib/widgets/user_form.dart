@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:moyeser_academy_web/widgets/drop_down.dart';
+import '../Services/fire_base.dart';
 import '../constants/colors.dart';
 import '../constants/lists.dart';
 import 'phone_number_field.dart';
@@ -16,9 +19,10 @@ class UserForm extends StatefulWidget {
 
 class UserFormState extends State<UserForm> {
   final _formKey = GlobalKey<FormState>();
-  // final FirebaseService _firebaseService = FirebaseService();
+  final FirebaseService _firebaseService = FirebaseService();
   bool _isLoading = false;
-  String? _name, _email, _age, _gender, phone, _program;
+  String? _name, _email, _age, _gender, _program;
+  String? phone; // Define phone as a class member
   final List<String> _genders = ['Male', 'Female'];
 
   @override
@@ -26,7 +30,6 @@ class UserFormState extends State<UserForm> {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        // color: Colors.white,
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Row(
@@ -154,47 +157,76 @@ class UserFormState extends State<UserForm> {
       ),
     );
   }
+Widget buildPhoneNumberField() {
+  return IntlPhoneField(
+    decoration: const InputDecoration(
+      labelText: 'Phone',
+      border: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.green),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.green),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.green),
+      ),
+    ),
+    initialCountryCode: 'US',
+    inputFormatters: [
+      FilteringTextInputFormatter.digitsOnly,
+    ], // Only numbers allowed
+    onCountryChanged: (country) {
+      print('Country changed to: ${country.name}');
+    },
+    onSaved: (phoneNumber) => phone = phoneNumber?.completeNumber,
+    validator: (phoneNumber) {
+      if (phoneNumber == null || phoneNumber.completeNumber.isEmpty) {
+        return 'Please enter your phone number';
+      }
+      return null;
+    },
+  );
+}
 
   void _submitForm() async {
-    // initializeFirebase();
-    // if (_formKey.currentState?.validate() ?? false) {
-    //   _formKey.currentState?.save();
-    //   setState(() {
-    //     _isLoading = true;
-    //   });
+    if (_formKey.currentState?.validate() ?? false) {
+      _formKey.currentState?.save();
+      setState(() {
+        _isLoading = true;
+      });
 
-    //   try {
-    //     bool userExists =
-    //         await _firebaseService.checkUserExists(_email!, phone!);
+      try {
+        bool userExists =
+            await _firebaseService.checkUserExists(_email!, phone!);
 
-    //     if (userExists) {
-    //       ScaffoldMessenger.of(context).showSnackBar(
-    //         const SnackBar(content: Text('User already exists!')),
-    //       );
-    //     } else {
-    //       await _firebaseService.saveUserData({
-    //         'name': _name,
-    //         'email': _email,
-    //         'phone': phone,
-    //         'age': _age,
-    //         'gender': _gender,
-    //         'program': _program,
-    //       });
-    //       ScaffoldMessenger.of(context).showSnackBar(
-    //         const SnackBar(content: Text('User data submitted successfully!')),
-    //       );
-    //       _formKey.currentState?.reset();
-    //     }
-    //   } catch (e) {
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       SnackBar(content: Text('Error: $e')),
-    //     );
-    //   } finally {
-    //     setState(() {
-    //       _isLoading = false;
-    //     });
-    //   }
-    // }
+        if (userExists) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('User already exists!')),
+          );
+        } else {
+          await _firebaseService.saveUserData({
+            'name': _name,
+            'email': _email,
+            'phone': phone,
+            'age': _age,
+            'gender': _gender,
+            'program': _program,
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('User data submitted successfully!')),
+          );
+          _formKey.currentState?.reset();
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e')),
+        );
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 }
 
