@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'info_item.dart';
 
@@ -15,7 +14,7 @@ class InfoSection extends StatelessWidget {
         InfoItem(
           icon: Icons.school,
           text:
-              'Fajr Al-Quran Academy is an online Arab Egyptian Academy that teaches Quran, Islamic studies, and Arabic language for all ages and all levels. We are based in Egypt and our tutors are highly qualified Egyptian Azhary teachers.',
+              'Al-Fares Academy is an online Arab Egyptian Academy that teaches Quran, Islamic studies, and Arabic language for all ages and all levels. We are based in Egypt and our tutors are highly qualified Egyptian Azhary teachers.',
         ),
         SizedBox(height: 16.0),
         InfoItem(

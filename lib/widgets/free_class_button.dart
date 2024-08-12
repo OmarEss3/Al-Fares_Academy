@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:moyeser_academy_web/constants/routes.dart';
 import 'package:provider/provider.dart';
-
-import '../constants/lists.dart';
 import '../provider/navigation_provider.dart';
 
 class FreeClassButton extends StatelessWidget {
@@ -24,7 +22,7 @@ class FreeClassButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            color: const Color(0xff006464),
+            color: Color.fromARGB(255, 14, 32, 69),
           ),
           height: 40,
           width: 200,

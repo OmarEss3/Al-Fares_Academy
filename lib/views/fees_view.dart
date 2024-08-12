@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:moyeser_academy_web/constants/colors.dart';
+import 'package:moyeser_academy_web/constants/variables.dart';
 import 'package:moyeser_academy_web/widgets/footer.dart';
 import 'package:moyeser_academy_web/widgets/header_widget.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +51,7 @@ class FeesView extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
+                backgroundColor: kPrimaryColorDarkBlue,
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 shape: RoundedRectangleBorder(
@@ -61,7 +63,8 @@ class FeesView extends StatelessWidget {
                     .setSelectedIndex(0); // Example index for Contact Us
                 context.go(contactUsRoute);
               },
-              child: const Text('Contact Us', style: TextStyle(fontSize: 16)),
+              child: const Text('Contact Us',
+                  style: TextStyle(fontSize: 16, color: Colors.white)),
             ),
           ],
         ),
@@ -239,12 +242,12 @@ class FeesView extends StatelessWidget {
                 ],
               ),
               Container(
-                padding: EdgeInsets.all(16),
-                child: Column(
+                padding: const EdgeInsets.all(16),
+                child: const Column(
                   children: [
                     feesTextWidget(
                       text:
-                          'We can offer you a customized plan to suit your schedule. Choose the number and duration of the classes as you wish. Please contact us or email us at: Gmail@gmail.com',
+                          'We can offer you a customized plan to suit your schedule. Choose the number and duration of the classes as you wish. Please contact us or email us at: $kEmail',
                     ),
                     feesTextWidget(
                         text:

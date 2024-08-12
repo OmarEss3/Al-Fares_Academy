@@ -95,7 +95,7 @@ class _AnimatedBackgroundAndTextState extends State<AnimatedBackgroundAndText>
               child: const Column(
                 children: [
                   Text(
-                    'Welcome to Moyeser Academy ',
+                    'Welcome to Al-Fares Academy ',
                     style: TextStyle(
                       fontSize: 40, // Adjusted font size
                       color: Colors.white,

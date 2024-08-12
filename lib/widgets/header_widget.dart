@@ -6,6 +6,7 @@ import '../constants/lists.dart';
 import '../constants/routes.dart';
 import '../provider/navigation_provider.dart';
 import 'free_class_button.dart';
+import 'links_row.dart';
 import 'social_media.dart';
 import 'tabs_item.dart';
 
@@ -55,7 +56,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [kPrimaryColorGreen, kPrimaryColorGray],
+          colors: [kPrimaryColorDarkBlue, kPrimaryColorGray],
           end: Alignment.topCenter,
           begin: Alignment.bottomCenter,
         ),
@@ -68,11 +69,15 @@ class _HeaderWidgetState extends State<HeaderWidget> {
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: SizedBox(
-                  height: 100,
-                  child: Image.asset('assets/images/logo.png'),
-                ),
+                    height: 100,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                          50.0), // Adjust the value to control the roundness
+                      child: Image.asset(
+                          'assets/images/Al-Fares Academy logo.jpg'),
+                    )),
               ),
-              const SocialMedia(),
+              const SocialMediaIconsRow(),
               const FreeClassButton(),
             ],
           ),
@@ -103,7 +108,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
       onSelected: (int programIndex) {
         Provider.of<NavigationProvider>(context, listen: false)
             .setSelectedIndex(index);
-        GoRouter.of(context).go('$programsRoute/$programIndex');
+        GoRouter.of(context).go('$programsRoute/${programIndex + 1}');
       },
       itemBuilder: (BuildContext context) {
         return List.generate(6, (programIndex) {

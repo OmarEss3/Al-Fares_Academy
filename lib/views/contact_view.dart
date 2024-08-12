@@ -50,7 +50,7 @@ class ContactUsView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.phone, color: kPrimaryColorGreen),
+                          Icon(Icons.phone, color: kPrimaryColorDarkBlue),
                           const SizedBox(width: 10),
                           const Text(kPhoneNumber),
                         ],
@@ -58,7 +58,7 @@ class ContactUsView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.email, color: kPrimaryColorGreen),
+                          Icon(Icons.email, color: kPrimaryColorDarkBlue),
                           const SizedBox(width: 10),
                           const Text(kEmail),
                         ],

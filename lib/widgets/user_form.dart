@@ -113,7 +113,7 @@ class UserFormState extends State<UserForm> {
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 40, vertical: 16),
-                        backgroundColor: Colors.green,
+                        backgroundColor: kPrimaryColorDarkBlue,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -157,36 +157,37 @@ class UserFormState extends State<UserForm> {
       ),
     );
   }
-Widget buildPhoneNumberField() {
-  return IntlPhoneField(
-    decoration: const InputDecoration(
-      labelText: 'Phone',
-      border: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.green),
+
+  Widget buildPhoneNumberField() {
+    return IntlPhoneField(
+      decoration: const InputDecoration(
+        labelText: 'Phone',
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.green),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.green),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.green),
+        ),
       ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.green),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.green),
-      ),
-    ),
-    initialCountryCode: 'US',
-    inputFormatters: [
-      FilteringTextInputFormatter.digitsOnly,
-    ], // Only numbers allowed
-    onCountryChanged: (country) {
-      print('Country changed to: ${country.name}');
-    },
-    onSaved: (phoneNumber) => phone = phoneNumber?.completeNumber,
-    validator: (phoneNumber) {
-      if (phoneNumber == null || phoneNumber.completeNumber.isEmpty) {
-        return 'Please enter your phone number';
-      }
-      return null;
-    },
-  );
-}
+      initialCountryCode: 'US',
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+      ], // Only numbers allowed
+      onCountryChanged: (country) {
+        print('Country changed to: ${country.name}');
+      },
+      onSaved: (phoneNumber) => phone = phoneNumber?.completeNumber,
+      validator: (phoneNumber) {
+        if (phoneNumber == null || phoneNumber.completeNumber.isEmpty) {
+          return 'Please enter your phone number';
+        }
+        return null;
+      },
+    );
+  }
 
   void _submitForm() async {
     if (_formKey.currentState?.validate() ?? false) {
@@ -240,10 +241,10 @@ class TryFreeClassText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 80,
         fontWeight: FontWeight.bold,
-        color: Colors.green,
+        color: kPrimaryColorDarkBlue,
       ),
     );
   }
