@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "moyeser-academey"
-  }
+    "default": "alfaresacademy-38ccc",
+    "staging": "alfaresacademy-38ccc"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }

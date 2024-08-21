@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moyeser_academy_web/widgets/text_field.dart';
+
+import '../constants/colors.dart';
 
 Widget buildDropdown({
   required String label,
@@ -8,18 +11,7 @@ Widget buildDropdown({
   required FormFieldValidator<String?> validator,
 }) {
   return DropdownButtonFormField<String>(
-    decoration: InputDecoration(
-      labelText: label,
-      border: const OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.green),
-      ),
-      enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.green),
-      ),
-      focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.green),
-      ),
-    ),
+    decoration: inputDecoration(label),
     items: items.map((item) {
       return DropdownMenuItem(
         value: item,

@@ -5,7 +5,6 @@ import 'package:moyeser_academy_web/widgets/drop_down.dart';
 import '../Services/fire_base.dart';
 import '../constants/colors.dart';
 import '../constants/lists.dart';
-import 'phone_number_field.dart';
 import 'text_field.dart';
 
 class UserForm extends StatefulWidget {
@@ -125,7 +124,8 @@ class UserFormState extends State<UserForm> {
                             )
                           : const Text(
                               'Submit',
-                              style: TextStyle(fontSize: 18),
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.white),
                             ),
                     ),
                   ),
@@ -160,16 +160,16 @@ class UserFormState extends State<UserForm> {
 
   Widget buildPhoneNumberField() {
     return IntlPhoneField(
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'Phone',
         border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.green),
+          borderSide: BorderSide(color: kPrimaryColorDarkBlue),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.green),
+          borderSide: BorderSide(color: kPrimaryColorDarkBlue),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.green),
+          borderSide: BorderSide(color: kPrimaryColorDarkBlue),
         ),
       ),
       initialCountryCode: 'US',

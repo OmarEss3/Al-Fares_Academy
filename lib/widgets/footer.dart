@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:moyeser_academy_web/constants/colors.dart';
 import 'package:moyeser_academy_web/widgets/links_row.dart';
 
 class CustomFooter extends StatelessWidget {
@@ -7,7 +7,7 @@ class CustomFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      color: Colors.blueGrey,
+      color: kPrimaryColorDarkBlue,
       child: const Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[

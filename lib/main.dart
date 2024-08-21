@@ -11,22 +11,26 @@ import 'views/fees_view.dart';
 import 'views/home_view.dart';
 import 'views/out_tutors_view.dart';
 import 'views/programs_view.dart';
+import 'widgets/adaptive_layout_widget.dart';
 
 void main() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
-    await  initializeFirebase();
+  await initializeFirebase();
 
   runApp(
     ChangeNotifierProvider(
       create: (context) => NavigationProvider(),
-      child: const MyApp(),
+      child: AdaptiveLayout(
+          mobileLayout: (context) => const SizedBox(),
+          tabletLayout: (context) => const SizedBox(),
+          desktopLayout: (context) => const DesktopLayout()),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class DesktopLayout extends StatelessWidget {
+  const DesktopLayout({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -40,13 +40,13 @@ class FirebaseService {
 Future<void> initializeFirebase() async {
   await Firebase.initializeApp(
     options: const FirebaseOptions(
-      apiKey: "AIzaSyCXmEXiQjki5vUFYVhKEAgMET9MeCwykAA",
-      authDomain: "moyeser-academey.firebaseapp.com",
-      projectId: "moyeser-academey",
-      storageBucket: "moyeser-academey.appspot.com",
-      messagingSenderId: "173191686386",
-      appId: "1:173191686386:web:82df9e9d818477e2d9486b",
-      measurementId: "G-37WBVB8L2M",
+  apiKey: "AIzaSyBN4_AZecGEvvoB8dFC5900A3Pe6sy5Wdc",
+  authDomain: "alfaresacademy-38ccc.firebaseapp.com",
+  projectId: "alfaresacademy-38ccc",
+  storageBucket: "alfaresacademy-38ccc.appspot.com",
+  messagingSenderId: "712382609693",
+  appId: "1:712382609693:web:c3917f204a51c2000089f4",
+  measurementId: "G-F5EK68KQSF"
     ),
   );
 }
