@@ -23,7 +23,7 @@ void main() async {
       create: (context) => NavigationProvider(),
       child: AdaptiveLayout(
           mobileLayout: (context) => const SizedBox(),
-          tabletLayout: (context) => const SizedBox(),
+          tabletLayout: (context) => const DesktopLayout(),
           desktopLayout: (context) => const DesktopLayout()),
     ),
   );
@@ -73,8 +73,10 @@ class DesktopLayout extends StatelessWidget {
     );
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Moyeser Academy',
       theme: ThemeData(
+        fontFamily: 'Merriweather',
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       routerConfig: router,

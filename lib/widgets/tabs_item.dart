@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moyeser_academy_web/utils/app_style.dart';
 
 class TabsItem extends StatelessWidget {
   final String text;
@@ -20,7 +21,7 @@ class TabsItem extends StatelessWidget {
         onTap: onTap,
         child: IntrinsicWidth(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+            padding: const EdgeInsets.symmetric(vertical: 9),
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
@@ -29,14 +30,7 @@ class TabsItem extends StatelessWidget {
                 ),
               ),
             ),
-            child: Text(
-              text,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white
-              ),
-            ),
+            child: Text(text, style: AppStyle.styleBold20(context)),
           ),
         ),
       ),

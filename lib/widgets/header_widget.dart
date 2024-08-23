@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moyeser_academy_web/utils/size_config.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../constants/colors.dart';
@@ -82,15 +83,22 @@ class _HeaderWidgetState extends State<HeaderWidget> {
             ],
           ),
           const SizedBox(height: 12),
-          buildTabs(),
+          MediaQuery.sizeOf(context).width > SizeConfig.desktop
+              ? buildTabs()
+              : const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CustomMenuButton(),
+                  ],
+                ),
         ],
       ),
     );
   }
 
   Widget buildTabs() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+    return FittedBox(
+      fit: BoxFit.scaleDown,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -160,5 +168,105 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   @override
   Widget build(BuildContext context) {
     return buildHeader();
+  }
+}
+
+class CustomMenuButton extends StatelessWidget {
+  const CustomMenuButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(left: 8),
+      child: IconButton(
+        icon: const Icon(Icons.menu),
+        onPressed: () {
+          showMenu(
+            context: context,
+            position: const RelativeRect.fromLTRB(0, 80, 0, 0),
+            items: [
+              PopupMenuItem(
+                child: const Text('Home'),
+                onTap: () {
+                  final provider =
+                      Provider.of<NavigationProvider>(context, listen: false);
+                  provider.setSelectedIndex(0);
+                  context.go(homeRoute);
+                },
+              ),
+              PopupMenuItem(
+                child: const Text('Programs'),
+                onTap: () async {
+                  // Delay navigation to allow submenu to be shown
+                  await Future.delayed(Duration(milliseconds: 100));
+                  showMenu(
+                    context: context,
+                    position: const RelativeRect.fromLTRB(0, 80, 0, 0),
+                    items: [
+                      for (int i = 0; i < programs.length; i++)
+                        PopupMenuItem(
+                          child: Text(programs[i]),
+                          onTap: () {
+                            final provider = Provider.of<NavigationProvider>(
+                                context,
+                                listen: false);
+                            provider.setSelectedIndex(1);
+                            context.go('$programsRoute/${i + 1}');
+                          },
+                        ),
+                    ],
+                  );
+                },
+              ),
+              PopupMenuItem(
+                child: const Text('Fees'),
+                onTap: () {
+                  final provider =
+                      Provider.of<NavigationProvider>(context, listen: false);
+                  provider.setSelectedIndex(2);
+                  context.go(feesRoute);
+                },
+              ),
+              PopupMenuItem(
+                child: const Text('Contact Us'),
+                onTap: () {
+                  final provider =
+                      Provider.of<NavigationProvider>(context, listen: false);
+                  provider.setSelectedIndex(3);
+                  context.go(contactUsRoute);
+                },
+              ),
+              PopupMenuItem(
+                child: const Text('Our Tutors'),
+                onTap: () {
+                  final provider =
+                      Provider.of<NavigationProvider>(context, listen: false);
+                  provider.setSelectedIndex(4);
+                  context.go(outTutorsRoute);
+                },
+              ),
+              PopupMenuItem(
+                child: const Text('Comments'),
+                onTap: () {
+                  final provider =
+                      Provider.of<NavigationProvider>(context, listen: false);
+                  provider.setSelectedIndex(5);
+                  context.go(commentsRoute);
+                },
+              ),
+              PopupMenuItem(
+                child: const Text('Blogs'),
+                onTap: () {
+                  final provider =
+                      Provider.of<NavigationProvider>(context, listen: false);
+                  provider.setSelectedIndex(6);
+                  context.go(blogsRoute);
+                },
+              ),
+            ],
+          );
+        },
+      ),
+    );
   }
 }

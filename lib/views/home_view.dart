@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moyeser_academy_web/utils/app_style.dart';
 import '../widgets/footer.dart';
 import '../widgets/header_widget.dart';
 import '../widgets/info_section.dart';
@@ -92,37 +93,23 @@ class _AnimatedBackgroundAndTextState extends State<AnimatedBackgroundAndText>
             position: _animation,
             child: Container(
               padding: const EdgeInsets.all(16.0),
-              child: const Column(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Welcome to Al-Fares Academy ',
-                    style: TextStyle(
-                      fontSize: 40, // Adjusted font size
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
+                    style: AppStyle.styleBold40(context),
                   ),
                   Text(
                     'for teaching Quran',
-                    style: TextStyle(
-                      fontSize: 30, // Adjusted font size
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
+                    style: AppStyle.styleBold30(context),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Text(
                     'The Messenger of Allah (PBUH) said “The best of you are the ones who learn the Quran and teach it to others” (Bukhari)',
-                    style: TextStyle(
-                      fontSize: 20, // Adjusted font size
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
+                    style: AppStyle.styleBold20(context),
                   ),
                 ],
               ),
