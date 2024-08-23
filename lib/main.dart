@@ -22,7 +22,7 @@ void main() async {
     ChangeNotifierProvider(
       create: (context) => NavigationProvider(),
       child: AdaptiveLayout(
-          mobileLayout: (context) => const SizedBox(),
+          mobileLayout: (context) => const DesktopLayout(),
           tabletLayout: (context) => const DesktopLayout(),
           desktopLayout: (context) => const DesktopLayout()),
     ),

@@ -14,6 +14,33 @@ class AppStyle {
     );
   }
 
+  static TextStyle styleBold18(context) {
+    return TextStyle(
+      color: const Color(0xFF000000),
+      fontSize: getResponsiveFontSize(context, fontSize: 18),
+      fontFamily: 'Merriweather',
+      fontWeight: FontWeight.w700,
+    );
+  }
+
+  static TextStyle styleRegular14(context) {
+    return TextStyle(
+      color: const Color(0xFF000000),
+      fontSize: getResponsiveFontSize(context, fontSize: 14),
+      fontFamily: 'Merriweather',
+      fontWeight: FontWeight.w500,
+    );
+  }
+
+  static TextStyle styleRegular16(context) {
+    return TextStyle(
+      color: const Color(0xFF000000),
+      fontSize: getResponsiveFontSize(context, fontSize: 16),
+      fontFamily: 'Merriweather',
+      fontWeight: FontWeight.w500,
+    );
+  }
+
   static TextStyle styleBold40(context) {
     return TextStyle(
       color: const Color(0xFFFFFFFF),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:moyeser_academy_web/constants/colors.dart';
-import 'package:moyeser_academy_web/constants/variables.dart';
-import 'package:moyeser_academy_web/widgets/footer.dart';
-import 'package:moyeser_academy_web/widgets/header_widget.dart';
 import 'package:provider/provider.dart';
-
+import '../constants/colors.dart';
 import '../constants/routes.dart';
+import '../constants/variables.dart';
 import '../provider/navigation_provider.dart';
+import '../utils/app_style.dart';
+import '../widgets/footer.dart';
+import '../widgets/header_widget.dart';
 
 class FeesView extends StatelessWidget {
   const FeesView({super.key});
@@ -32,22 +32,14 @@ class FeesView extends StatelessWidget {
           children: [
             Text(
               header,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: AppStyle.styleBold18(context),
             ),
             const SizedBox(height: 16),
-            Text(priceGBP,
-                style: const TextStyle(fontSize: 16, color: Colors.black54)),
-            Text(priceUSD,
-                style: const TextStyle(fontSize: 16, color: Colors.black54)),
+            Text(priceGBP, style: AppStyle.styleRegular16(context)),
+            Text(priceUSD, style: AppStyle.styleRegular16(context)),
             const SizedBox(height: 8),
-            Text(classesPerMonth,
-                style: const TextStyle(fontSize: 14, color: Colors.black54)),
-            Text(hoursPerMonth,
-                style: const TextStyle(fontSize: 14, color: Colors.black54)),
+            Text(classesPerMonth, style: AppStyle.styleRegular14(context)),
+            Text(hoursPerMonth, style: AppStyle.styleRegular14(context)),
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -63,8 +55,11 @@ class FeesView extends StatelessWidget {
                     .setSelectedIndex(0); // Example index for Contact Us
                 context.go(contactUsRoute);
               },
-              child: const Text('Contact Us',
-                  style: TextStyle(fontSize: 16, color: Colors.white)),
+              child: Text(
+                'Contact Us',
+                style: AppStyle.styleRegular16(context)
+                    .copyWith(color: const Color(0xffffffff)),
+              ),
             ),
           ],
         ),
@@ -72,8 +67,94 @@ class FeesView extends StatelessWidget {
     );
   }
 
+  Widget buildPriceGrid(BuildContext context, int crossAxisCount) {
+    return GridView.count(
+      shrinkWrap: true,
+      crossAxisCount: crossAxisCount,
+      childAspectRatio: 1.5,
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      children: [
+        buildPriceCard(
+          context: context,
+          header: '1 class / week',
+          priceGBP: '£14',
+          priceUSD: '\$18',
+          classesPerMonth: '4 classes / month',
+          hoursPerMonth: '2 Hrs / month',
+        ),
+        buildPriceCard(
+          context: context,
+          header: '2 classes / week',
+          priceGBP: '£28',
+          priceUSD: '\$36',
+          classesPerMonth: '8 classes / month',
+          hoursPerMonth: '4 Hrs / month',
+        ),
+        buildPriceCard(
+          context: context,
+          header: '3 classes / week',
+          priceGBP: '£36',
+          priceUSD: '\$48',
+          classesPerMonth: '12 classes / month',
+          hoursPerMonth: '6 Hrs / month',
+        ),
+        buildPriceCard(
+          context: context,
+          header: '4 classes / week',
+          priceGBP: '£48',
+          priceUSD: '\$64',
+          classesPerMonth: '16 classes / month',
+          hoursPerMonth: '8 Hrs / month',
+        ),
+        buildPriceCard(
+          context: context,
+          header: '5 classes / week',
+          priceGBP: '£55',
+          priceUSD: '\$75',
+          classesPerMonth: '20 classes / month',
+          hoursPerMonth: '10 Hrs / month',
+        ),
+        buildPriceCard(
+          context: context,
+          header: '1 class / week (1 Hour)',
+          priceGBP: '£28',
+          priceUSD: '\$36',
+          classesPerMonth: '4 classes / month',
+          hoursPerMonth: '4 Hrs / month',
+        ),
+        buildPriceCard(
+          context: context,
+          header: '2 classes / week (1 Hour)',
+          priceGBP: '£48',
+          priceUSD: '\$64',
+          classesPerMonth: '8 classes / month',
+          hoursPerMonth: '8 Hrs / month',
+        ),
+        buildPriceCard(
+          context: context,
+          header: '3 classes / week (1 Hour)',
+          priceGBP: '£60',
+          priceUSD: '\$84',
+          classesPerMonth: '12 classes / month',
+          hoursPerMonth: '12 Hrs / month',
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    int crossAxisCount = 1; // Default for mobile
+
+    if (screenWidth >= 1200) {
+      crossAxisCount = 3; // Desktop
+    } else if (screenWidth >= 800) {
+      crossAxisCount = 2; // Tablet
+    }
+
     return Scaffold(
       body: Scrollbar(
         thumbVisibility: true,
@@ -122,80 +203,7 @@ class FeesView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              GridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                childAspectRatio: 1.5,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: [
-                  buildPriceCard(
-                    context: context,
-                    header: '1 class / week',
-                    priceGBP: '£14',
-                    priceUSD: '\$18',
-                    classesPerMonth: '4 classes / month',
-                    hoursPerMonth: '2 Hrs / month',
-                  ),
-                  buildPriceCard(
-                    context: context,
-                    header: '2 classes / week',
-                    priceGBP: '£28',
-                    priceUSD: '\$36',
-                    classesPerMonth: '8 classes / month',
-                    hoursPerMonth: '4 Hrs / month',
-                  ),
-                  buildPriceCard(
-                    context: context,
-                    header: '3 classes / week',
-                    priceGBP: '£36',
-                    priceUSD: '\$48',
-                    classesPerMonth: '12 classes / month',
-                    hoursPerMonth: '6 Hrs / month',
-                  ),
-                  buildPriceCard(
-                    context: context,
-                    header: '4 classes / week',
-                    priceGBP: '£48',
-                    priceUSD: '\$64',
-                    classesPerMonth: '16 classes / month',
-                    hoursPerMonth: '8 Hrs / month',
-                  ),
-                  buildPriceCard(
-                    context: context,
-                    header: '5 classes / week',
-                    priceGBP: '£55',
-                    priceUSD: '\$75',
-                    classesPerMonth: '20 classes / month',
-                    hoursPerMonth: '10 Hrs / month',
-                  ),
-                  buildPriceCard(
-                    context: context,
-                    header: '1 class / week (1 Hour)',
-                    priceGBP: '£28',
-                    priceUSD: '\$36',
-                    classesPerMonth: '4 classes / month',
-                    hoursPerMonth: '4 Hrs / month',
-                  ),
-                  buildPriceCard(
-                    context: context,
-                    header: '2 classes / week (1 Hour)',
-                    priceGBP: '£48',
-                    priceUSD: '\$64',
-                    classesPerMonth: '8 classes / month',
-                    hoursPerMonth: '8 Hrs / month',
-                  ),
-                  buildPriceCard(
-                    context: context,
-                    header: '3 classes / week (1 Hour)',
-                    priceGBP: '£60',
-                    priceUSD: '\$84',
-                    classesPerMonth: '12 classes / month',
-                    hoursPerMonth: '12 Hrs / month',
-                  ),
-                ],
-              ),
+              buildPriceGrid(context, crossAxisCount),
               const SizedBox(height: 32),
               const Center(
                 child: Text(
@@ -207,40 +215,7 @@ class FeesView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              GridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                childAspectRatio: 1.5,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: [
-                  buildPriceCard(
-                    context: context,
-                    header: '1 class / week',
-                    priceGBP: '£28',
-                    priceUSD: '\$36',
-                    classesPerMonth: '4 classes / month',
-                    hoursPerMonth: '4 Hrs / month',
-                  ),
-                  buildPriceCard(
-                    context: context,
-                    header: '2 classes / week',
-                    priceGBP: '£48',
-                    priceUSD: '\$64',
-                    classesPerMonth: '8 classes / month',
-                    hoursPerMonth: '8 Hrs / month',
-                  ),
-                  buildPriceCard(
-                    context: context,
-                    header: '3 classes / week',
-                    priceGBP: '£60',
-                    priceUSD: '\$84',
-                    classesPerMonth: '12 classes / month',
-                    hoursPerMonth: '12 Hrs / month',
-                  ),
-                ],
-              ),
+              buildPriceGrid(context, crossAxisCount),
               Container(
                 padding: const EdgeInsets.all(16),
                 child: const Column(
