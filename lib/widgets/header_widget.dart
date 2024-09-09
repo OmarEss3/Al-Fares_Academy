@@ -8,7 +8,6 @@ import '../constants/routes.dart';
 import '../provider/navigation_provider.dart';
 import 'free_class_button.dart';
 import 'links_row.dart';
-import 'social_media.dart';
 import 'tabs_item.dart';
 
 class HeaderWidget extends StatefulWidget {
@@ -160,6 +159,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   }
 
   void onItemTapped(int index) {
+      FocusScope.of(context).unfocus();  // Remove any focus
+
     Provider.of<NavigationProvider>(context, listen: false)
         .setSelectedIndex(index);
     context.go(getRouteForTab(tabs[index]));
@@ -198,7 +199,7 @@ class CustomMenuButton extends StatelessWidget {
                 child: const Text('Programs'),
                 onTap: () async {
                   // Delay navigation to allow submenu to be shown
-                  await Future.delayed(Duration(milliseconds: 100));
+                  await Future.delayed(const Duration(milliseconds: 100));
                   showMenu(
                     context: context,
                     position: const RelativeRect.fromLTRB(0, 80, 0, 0),

@@ -17,7 +17,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await initializeFirebase();
-
   runApp(
     ChangeNotifierProvider(
       create: (context) => NavigationProvider(),
@@ -74,7 +73,7 @@ class DesktopLayout extends StatelessWidget {
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Moyeser Academy',
+      title: 'Al-Fares Academy',
       theme: ThemeData(
         fontFamily: 'Merriweather',
         iconTheme: const IconThemeData(color: Colors.white),

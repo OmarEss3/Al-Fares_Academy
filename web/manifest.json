@@ -1,11 +1,11 @@
 {
-    "name": "moyeser_academy_web",
-    "short_name": "moyeser_academy_web",
-    "start_url": ".",
+    "name": "Al Fares Academy",
+    "short_name": "Al Fares",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Al Fares Academy for teaching Quran, Arabic, and Islamic lessons.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

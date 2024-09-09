@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:moyeser_academy_web/utils/app_style.dart';
+import 'package:moyeser_academy_web/utils/size_config.dart';
 import 'package:moyeser_academy_web/widgets/footer.dart';
 import 'package:moyeser_academy_web/widgets/header_widget.dart';
 import '../design_pattern.dart';
@@ -12,10 +14,64 @@ class ProgramsView extends StatefulWidget {
   ProgramsViewState createState() => ProgramsViewState();
 }
 
-class ProgramsViewState extends State<ProgramsView> with SingleTickerProviderStateMixin {
+class ProgramsViewState extends State<ProgramsView>
+    with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    final programContent = ProgramContentFactory.getProgramContent(widget.programId);
+    final programContent =
+        ProgramContentFactory.getProgramContent(widget.programId);
+    final List<Widget> destoptView = [
+      Expanded(
+        flex: 3,
+        child: SingleChildScrollView(
+          child: Text(
+            programContent.text,
+            style: const TextStyle(
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+      const SizedBox(width: 16),
+      Expanded(
+        flex: 2,
+        child: Image.asset(
+          programContent.imagePath,
+          fit: BoxFit.cover,
+        ),
+      ),
+    ];
+    final List<Widget> mobileView = [
+      Expanded(
+        child: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    Colors.white.withOpacity(
+                        0.6), // Adjust the opacity to lighten the image
+                    BlendMode
+                        .srcATop, // Blends the white color on top of the image to lighten it
+                  ),
+                  child: Image.asset(
+                    programContent.imagePath,
+                    fit: BoxFit
+                        .cover, // Ensures the image covers the entire background
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(
+                    16.0), // Optional: Add padding to the text
+                child: Text(programContent.text,
+                    style: AppStyle.styleRegular16(context)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ];
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -40,27 +96,10 @@ class ProgramsViewState extends State<ProgramsView> with SingleTickerProviderSta
                     margin: const EdgeInsets.all(16),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: SingleChildScrollView(
-                            child: Text(
-                              programContent.text,
-                              style: const TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          flex: 2,
-                          child: Image.asset(
-                            programContent.imagePath,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ],
+                      children:
+                          MediaQuery.sizeOf(context).width > SizeConfig.tablet
+                              ? destoptView
+                              : mobileView,
                     ),
                   ),
                 ),

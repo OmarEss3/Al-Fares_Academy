@@ -1,28 +1,11 @@
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-const sgMail = require('@sendgrid/mail');
-
-admin.initializeApp();
-sgMail.setApiKey('YOUR_SENDGRID_API_KEY');  // Replace with your actual SendGrid API key
-
-exports.makeUppercase = functions.firestore.document('/messages/{documentId}')
-.onCreate((snap, context) => {
-  const original = snap.data().original;
-  console.log('Uppercasing', context.params.documentId, original);
-  const uppercase = original.toUpperCase();
-  return snap.ref.set({uppercase}, {merge: true});
-});
-
-exports.sendEmailNotification = functions.firestore
-    .document('users/{userId}')
-    .onCreate((snap, context) => {
-        const newValue = snap.data();
-        const msg = {
-            to: 'omaresam2323@gmail.com', // Change to your recipient
-            from: 'moyeserclients@gmail.com', // Change to your verified sender
-            subject: 'New Form Submission',
-            text: `A new form has been submitted with the following details: ${JSON.stringify(newValue)}`,
-        };
-
-        return sgMail.send(msg);
-    });
+function sendEmail() {
+  emailjs.send("service_fdufkbw", "template_tdu9fa8", {
+    user_email: "omaresam0000@gmail.com",  // Your email
+    admin_email: "omaresam2323@gmail.com"  // Admin email
+  }, "your_emailjs_user_id")
+  .then((response) => {
+    console.log('Email sent successfully!', response.status, response.text);
+  }, (error) => {
+    console.error('Failed to send email:', error);
+  });
+}

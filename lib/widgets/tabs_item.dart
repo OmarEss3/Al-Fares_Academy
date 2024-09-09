@@ -19,18 +19,23 @@ class TabsItem extends StatelessWidget {
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: onTap,
-        child: IntrinsicWidth(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 9),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: isSelected ? Colors.white : Colors.transparent,
-                  width: 3, // Thickness of the bottom border
+        child: FocusScope(
+          child: Focus(
+            onFocusChange: (hasFocus) {},
+            child: IntrinsicWidth(
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 9),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                        // color: isSelected ? Colors.white : Colors.transparent,
+                        // width: 3,
+                        ),
+                  ),
                 ),
+                child: Text(text, style: AppStyle.styleBold20(context)),
               ),
             ),
-            child: Text(text, style: AppStyle.styleBold20(context)),
           ),
         ),
       ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -140,14 +142,17 @@ class UserFormState extends State<UserForm> {
                   child: Center(
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: const Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          TryFreeClassText(text: 'Try'),
-                          TryFreeClassText(text: ' a '),
-                          TryFreeClassText(text: 'Free '),
-                          TryFreeClassText(text: 'Class'),
-                        ],
+                      child: const FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            TryFreeClassText(text: 'Try'),
+                            TryFreeClassText(text: ' a '),
+                            TryFreeClassText(text: 'Free '),
+                            TryFreeClassText(text: 'Class'),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -172,12 +177,12 @@ class UserFormState extends State<UserForm> {
           borderSide: BorderSide(color: kPrimaryColorDarkBlue),
         ),
       ),
-      initialCountryCode: 'US',
+      initialCountryCode: 'EG',
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
       ], // Only numbers allowed
       onCountryChanged: (country) {
-        print('Country changed to: ${country.name}');
+        log('Country changed to: ${country.name}');
       },
       onSaved: (phoneNumber) => phone = phoneNumber?.completeNumber,
       validator: (phoneNumber) {
@@ -196,16 +201,29 @@ class UserFormState extends State<UserForm> {
         _isLoading = true;
       });
 
+      log('Form validated and saved. Checking if user exists...');
+
       try {
         bool userExists =
             await _firebaseService.checkUserExists(_email!, phone!);
+        if (_name == null ||
+            _email == null ||
+            phone == null ||
+            _age == null ||
+            _gender == null ||
+            _program == null) {
+          log('Error: One or more fields are empty.');
+          return; // Exit the function early if any field is empty
+        }
 
         if (userExists) {
+          print('User already exists.');
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('User already exists!')),
           );
         } else {
-          await _firebaseService.saveUserData({
+          log('Saving user data...');
+          await _firebaseService.saveUserData(context, {
             'name': _name,
             'email': _email,
             'phone': phone,
@@ -213,12 +231,14 @@ class UserFormState extends State<UserForm> {
             'gender': _gender,
             'program': _program,
           });
+          log('User data saved successfully.');
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('User data submitted successfully!')),
           );
           _formKey.currentState?.reset();
         }
       } catch (e) {
+        log('Error occurred: $e');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: $e')),
         );

@@ -177,7 +177,7 @@ class FeesView extends StatelessWidget {
                       ),
                       feesTextWidget(
                         text:
-                            'Moyeser Academy offers affordable fees for all students. Payment is done in advance at the beginning of every month, through easy payment methods.',
+                            'Al-Fares Academy offers affordable fees for all students. Payment is done in advance at the beginning of every month, through easy payment methods.',
                       ),
                       feesTextWidget(
                         text:

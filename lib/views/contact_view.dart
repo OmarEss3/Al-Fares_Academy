@@ -3,6 +3,7 @@ import 'package:moyeser_academy_web/constants/variables.dart';
 import 'package:moyeser_academy_web/widgets/footer.dart';
 import 'package:moyeser_academy_web/widgets/header_widget.dart';
 import '../constants/colors.dart';
+import '../utils/size_config.dart';
 import '../widgets/user_form.dart';
 
 class ContactUsView extends StatelessWidget {
@@ -75,12 +76,14 @@ class ContactUsView extends StatelessWidget {
                         child: UserForm(freeClssTxt: false),
                       ),
                       const SizedBox(width: 20),
-                      Expanded(
-                        child: Image.asset(
-                          'assets/images/callCener.jpeg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                      MediaQuery.sizeOf(context).width > SizeConfig.tablet
+                          ? Expanded(
+                              child: Image.asset(
+                                'assets/images/callCener.jpeg',
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : const SizedBox()
                     ],
                   ),
                 ],
