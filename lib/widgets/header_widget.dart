@@ -1,5 +1,5 @@
+import 'package:al_fares_academy/utils/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:moyeser_academy_web/utils/size_config.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../constants/colors.dart';

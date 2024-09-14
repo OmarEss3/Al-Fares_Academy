@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moyeser_academy_web/widgets/text_field.dart';
+import 'text_field.dart';
 
 Widget buildDropdown({
   required String label,

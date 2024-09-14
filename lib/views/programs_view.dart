@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:moyeser_academy_web/utils/app_style.dart';
-import 'package:moyeser_academy_web/utils/size_config.dart';
-import 'package:moyeser_academy_web/widgets/footer.dart';
-import 'package:moyeser_academy_web/widgets/header_widget.dart';
 import '../design_pattern.dart';
+import '../utils/app_style.dart';
+import '../utils/size_config.dart';
+import '../widgets/footer.dart';
+import '../widgets/header_widget.dart';
 
 class ProgramsView extends StatefulWidget {
   final int programId;

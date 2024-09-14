@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moyeser_academy_web/utils/app_style.dart';
+import '../utils/app_style.dart';
 import '../widgets/footer.dart';
 import '../widgets/header_widget.dart';
 import '../widgets/info_section.dart';

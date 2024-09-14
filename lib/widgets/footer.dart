@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:moyeser_academy_web/constants/colors.dart';
-import 'package:moyeser_academy_web/widgets/links_row.dart';
+import '../constants/colors.dart';
+import 'links_row.dart';
 
 class CustomFooter extends StatelessWidget {
   @override

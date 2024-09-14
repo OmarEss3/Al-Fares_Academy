@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:moyeser_academy_web/constants/routes.dart';
 import 'package:provider/provider.dart';
+import '../constants/routes.dart';
 import '../provider/navigation_provider.dart';
 
 class FreeClassButton extends StatelessWidget {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:moyeser_academy_web/views/blogs_view.dart';
-import 'package:moyeser_academy_web/views/comments_view.dart';
 import 'package:provider/provider.dart';
 import 'Services/fire_base.dart';
 import 'constants/routes.dart';
 import 'provider/navigation_provider.dart';
+import 'views/blogs_view.dart';
+import 'views/comments_view.dart';
 import 'views/contact_view.dart';
 import 'views/fees_view.dart';
 import 'views/home_view.dart';
@@ -58,7 +58,7 @@ class DesktopLayout extends StatelessWidget {
         ),
         GoRoute(
           path: outTutorsRoute,
-          builder: (context, state) => const OurTutorsView(),
+          builder: (context, state) =>   OurTutorsView(),
         ),
         GoRoute(
           path: commentsRoute,
