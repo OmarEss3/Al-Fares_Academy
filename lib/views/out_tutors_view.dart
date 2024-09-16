@@ -18,38 +18,40 @@ class OurTutorsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const HeaderWidget(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Our Tutors',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  const SizedBox(height: 16),
-                  // Display the list of tutors directly
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: tutors.length,
-                    itemBuilder: (context, index) {
-                      return TutorCard(
-                          tutor: tutors[index]); // Create cards for tutors
-                    },
-                  ),
-                ],
+      body: Column(
+        children: [
+          const HeaderWidget(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Our Tutors',
+                      style:
+                          Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                    ),
+                    const SizedBox(height: 16),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: tutors.length,
+                      itemBuilder: (context, index) {
+                        return TutorCard(
+                            tutor: tutors[index]); // Create cards for tutors
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-            Positioned(bottom: 0, child: CustomFooter()), // Footer widget
-          ],
-        ),
+          ),
+          CustomFooter(), // Footer widget at the bottom
+        ],
       ),
     );
   }
