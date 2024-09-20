@@ -176,7 +176,7 @@ class UserFormState extends State<UserForm> {
           borderSide: BorderSide(color: kPrimaryColorDarkBlue),
         ),
       ),
-      initialCountryCode: 'EG',
+      initialCountryCode: 'US',
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
       ], // Only numbers allowed

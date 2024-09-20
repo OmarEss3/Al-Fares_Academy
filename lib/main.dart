@@ -1,3 +1,4 @@
+import 'package:al_fares_academy/views/not_found_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +35,14 @@ class DesktopLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final router = GoRouter(
+      
       initialLocation: homeRoute,
+      errorPageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const NotFoundPage(),
+        );
+      },
       routes: [
         GoRoute(
           path: homeRoute,
@@ -58,7 +66,7 @@ class DesktopLayout extends StatelessWidget {
         ),
         GoRoute(
           path: outTutorsRoute,
-          builder: (context, state) =>   OurTutorsView(),
+          builder: (context, state) => OurTutorsView(),
         ),
         GoRoute(
           path: commentsRoute,
@@ -68,7 +76,8 @@ class DesktopLayout extends StatelessWidget {
           path: blogsRoute,
           builder: (context, state) => const BlogsView(),
         ),
-      ],
+      ],routerNeglect: false,
+      
     );
 
     return MaterialApp.router(

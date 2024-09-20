@@ -39,11 +39,10 @@ class FirebaseService {
       BuildContext context, Map<String, dynamic> data) async {
     log('Attempting to save user data: ${data['email']}, ${data['phone']}');
     try {
-      await _firestore.collection('users').add(data);
-      log('User data saved successfully!');
+      String docId = data['email']; // or use phone or a combination of fields
 
-      // Navigate to the WebView to send the email
- 
+      await _firestore.collection('users').doc(docId).set(data);
+      log('User data saved successfully with ID: $docId');
     } catch (e) {
       log('Error saving user data: $e');
     }
